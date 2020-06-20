@@ -20,7 +20,7 @@ import cv2
 
 
 
-app = Flask(__name__)
+application = app = Flask(__name__)
 
 
 
