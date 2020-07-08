@@ -1,0 +1,95 @@
+<!-- Hunter Mitchell 06/30/20 -->
+
+<!-- PARTIALLY GOTTEN FROM https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_wedding&stacked=h -->
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href='/static/style.css'>
+
+
+
+
+<body>
+
+
+  <!-- PHOTO PREDICTION PORTION -->
+  <div class="w3-container w3-padding-64 w3-pale-red w3-grayscale-min w3-center" id="predict">
+    <div class="w3-content">
+      <h1 class="w3-text"><b>Face Prediction Project</b></h1>
+      <!--<img class="w3-round-large w3-grayscale-min" src="/w3images/wedding_location.jpg" style="width:100%;margin:64px 0">-->
+      <h3 class="w3-text">Fully developed by Hunter Mitchell</h3><br><br>
+
+      Both models are trained with 3000 images of faces from the imdb-wiki dataset. The gender model is a simple
+      classification model and the age model is a bit more complicated regression model. They both use the widely
+      popular convolutional neural network DenseNet. The gender prediction model has an accuracy of about 92%,
+      while the age prediction model has a mean absolute error of less than 8. Both models work better when you are
+      closer to the camera and showing your full face and hair. Test out what works and what doesn't and feel free to let me know! 
+      I look forward to implementing more to this interface soon! <br> <br> <br>
+
+      <!-- HTML PORTION -->
+      <button id="startbutton">
+        <h3>Take Photo</h3>
+      </button> <br> <br>
+      <div class="camera">
+        <video id="video">Video stream not available.</video>
+      </div>
+
+      <canvas id="canvas">
+      </canvas>
+      <div class="output">
+        <!--<img id="photo" alt="The screen capture will appear in this box.">-->
+      </div>
+
+
+      <br> <br>
+
+
+      <div class="w3-row" id='predictions'>
+
+        <div class="w3-half">
+          <button id="predictGenderButton">
+            <h3>Predict Gender</h3>
+          </button>
+          <br> <br>
+          <h5>Male Probability: 0%, Female Probability: 0% </h5>
+        </div>
+
+        <div class="w3-half">
+          <button id="predictAgeButton">
+            <h3>Predict Age</h3>
+          </button>
+          <br> <br>
+          <h4>__ Years Old!</h4>
+        </div>
+
+      </div>
+
+      <br> <br> <br>
+
+      <p class="w3-xlarge">
+        <button id='go_to_home' class="w3-button w3-round w3-blue-gray w3-hover-opacity-off"
+          style="padding:10px 80px">To Homepage</button>
+      </p>
+
+
+    </div>
+  </div>
+
+
+
+  <br><br><br>
+
+
+
+  <!--   SCRIPT   -->
+  <script type="text/javascript" src="/static/project_script.js"></script>
+  <!--<script rel="javascript" type="text/javascript" href="js/jquery-1.11.3.min.js"></script>-->
+
+
+</body>
+
+</html>

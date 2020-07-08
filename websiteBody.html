@@ -1,0 +1,131 @@
+<!-- Hunter Mitchell 06/30/20 -->
+
+<!-- PARTIALLY GOTTEN FROM https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_wedding&stacked=h -->
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href='/static/style.css'>
+
+
+
+
+<body>
+
+  <!-- Header / Home-->
+  <header class="w3-display-container w3-wide bgimg w3-grayscale-min" id="home">
+    <div class="w3-display-middle w3-text-white w3-center">
+      <h1 class="w3-jumbo">Hunter Mitchell <br> </h1><br><br><br>
+    </div>
+  </header>
+
+  <!-- Navbar (sticky bottom) -->
+  <div class="w3-bottom w3-hide-small">
+    <div class="w3-bar w3-white w3-center w3-padding w3-opacity-min w3-hover-opacity-off">
+      <a href="#home" style="width:25%" class="w3-bar-item w3-button">Home</a>
+      <a href="#me" style="width:25%" class="w3-bar-item w3-button">About Me</a>
+      <a href="#project" style="width:25%" class="w3-bar-item w3-button">Face Prediction Project</a>
+      <a href="#other" style="width:25%" class="w3-bar-item w3-button w3-hover-black">Other</a>
+    </div>
+  </div>
+
+  <!-- About Me -->
+  <div class="w3-container w3-padding-64 w3-pale-red w3-grayscale-min" id="me">
+    <div class="w3-content">
+      <h1 class="w3-center w3-text"><b>About Me</b></h1> <br> <br>
+
+      <div class='w3-half'>
+        <!-- <img src="images/hunter4.jpeg" alt="Me" width="300" height="450"> -->
+        <img src="/static/images/hunter1.jpeg" alt="Me" width="300" height="450">
+      </div>
+
+      <div class='w3-half'> <br> <br>
+        <p> I have recently graduated from WSU with a BS in Applied Mathematics and a minor in Astrophysics. 
+        During my time in college, I have learned and accomplished so much. I am now actively searching for a
+        job in Data Science and Machine Learning where I can apply my skills and passions.
+        I am primarily looking for problems that are complex and mathematically rich that I can work on with
+        a team to benefit the company. My favorite language is Python and my favorite ML algorithm is Neural Nets!
+        I also enjoy developing apps, creating art, reading, and watching movies in my spare time. </p>
+        <!--<p class="w3-center"><a href="#wedding" class="w3-button w3-black w3-round w3-padding-large w3-large">My twitter</a></p>-->
+      </div>
+
+      <br> <br> <br> <br>
+
+      <!--<img class="w3-round w3-grayscale-min" src="images/hunter4.jpeg" style="width:100%;margin:32px 0">-->
+
+    </div>
+  </div>
+
+
+
+  <!-- Background photo -->
+  <div class="w3-display-container bgimg2">
+    <div class="w3-display-middle w3-text-white w3-center">
+      <!--<h1 class="w3-jumbo">Shoot for the stars!</h1><br>-->
+      <!--<h2>I think...</h2>-->
+    </div>
+  </div>
+
+
+
+  <!-- Face Project section -->
+  <div class="w3-container w3-padding-64 w3-pale-red w3-center w3-wide" id="project">
+    <h1 style="letter-spacing: 2px;"><b>Face Prediction Project</b></h1><br>
+    <p style="word-spacing: 0px; letter-spacing: 0px"> An interactive Machine Learning model that predicts your age and gender! </p> 
+    <br><br>
+    <p class="w3-xlarge">
+      <button id='go_to_project'
+        class="w3-button w3-round w3-red w3-opacity w3-hover-opacity-off" style="padding:10px 80px">Try It!</button>
+    </p>
+    <br><br>
+  </div>
+
+
+  <!-- Background photo -->
+  <div class="w3-display-container bgimg3">
+    <div class="w3-display-middle w3-text-white w3-center">
+    </div>
+  </div>
+
+
+
+  <!-- Other section -->
+  <div class="w3-container w3-padding-64 w3-pale-red w3-center w3-wide" id="other">
+    <h1>Other</h1><br>
+    <p style="word-spacing: 0px; letter-spacing: 0px"> Connect with me on LinkedIn, view some of my source code, or check out my mobile apps! </p> 
+    <br><br>
+    <div class='w3-third'>
+      <p class="w3-xlarge">
+        <button id='go_to_linkedin'
+          class="w3-button w3-round w3-red w3-opacity w3-hover-opacity-off" style="padding:8px 60px">My LinkedIn</button>
+      </p>
+    </div>
+    <div class='w3-third'>
+      <p class="w3-xlarge">
+        <button id='go_to_github'
+          class="w3-button w3-round w3-red w3-opacity w3-hover-opacity-off" style="padding:8px 60px">My GitHub</button>
+      </p>
+    </div>
+    <div class='w3-third'>
+      <p class="w3-xlarge">
+        <button id='go_to_apps'
+          class="w3-button w3-round w3-red w3-opacity w3-hover-opacity-off" style="padding:8px 60px">My Apps</button>
+      </p>
+    </div>
+    
+
+  </div>
+  <br><br><br>
+
+
+
+  <!--   SCRIPT   -->
+  <script type="text/javascript" src="/static/main_script.js"></script>
+
+
+</body>
+
+</html>
