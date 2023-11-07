@@ -1,7 +1,4 @@
-// Hunter Mitchell - 6/30/20
-
-// javascript for main page of website  :)
-
+// Javascript for main page of website
 
 document.getElementById("go_to_project").onclick = function () {
     location.href = "http://127.0.0.1:8080/project";
@@ -24,10 +21,10 @@ document.getElementById("go_to_github").onclick = function () {
       );
 };
 
-document.getElementById("go_to_apps").onclick = function () {
-    //location.href = "https://apps.apple.com/us/developer/hunter-mitchell/id1450700638";
+document.getElementById("go_to_resume").onclick = function () {
+    //location.href = "";
     window.open(
-        'https://apps.apple.com/us/developer/hunter-mitchell/id1450700638',
+        '',
         '_blank' // <- This is what makes it open in a new window.
       );
 };

@@ -1,7 +1,4 @@
-// Hunter Mitchell - 6/30/20
-
-// partially gotten from https://github.com/mdn/samples-server/blob/master/s/webrtc-capturestill/capture.js
-
+// Javascript for Face Prediction part of website - partially from https://github.com/mdn/samples-server/blob/master/s/webrtc-capturestill/capture.js
 
 var width = 320;    // We will scale the photo width to this
 var height = 320;     // This will be computed based on the input stream
@@ -17,16 +14,13 @@ var male_prob = null;
 var female_prob = null;
 
 
-
 function startup() {
-
     //console.log('starting up!');
 
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     photo = document.getElementById('photo');
     startbutton = document.getElementById('startbutton');
-
 
     navigator.mediaDevices.getUserMedia({ video: { width: { exact: width }, height: { exact: height } }, audio: false })
         .then(function (stream) {
@@ -59,7 +53,6 @@ function startup() {
 }
 
 function clearphoto() {
-
     var context = canvas.getContext('2d');
     context.fillStyle = "#AAA";
     context.fillRect(0, 0, canvas.width, canvas.height);
@@ -67,7 +60,6 @@ function clearphoto() {
     var data = canvas.toDataURL('image/png');
     //photo.setAttribute('src', data); // Get error here */
 }
-
 
 function takepicture() {
     var context = canvas.getContext('2d');
@@ -84,25 +76,17 @@ function takepicture() {
 } 
 window.addEventListener('load', startup, false);
 
-
-
 // WHERE THE TWO SEPARATE
-
-
 
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
-
-
-
 predictGenderButton.addEventListener('click', function (ev) {
     predictGender();
     ev.preventDefault();
 }, false);
-
 
 function predictGender() {
 
@@ -125,12 +109,10 @@ function predictGender() {
     });
 }
 
-
 predictAgeButton.addEventListener('click', function (ev) {
     predictAge();
     ev.preventDefault();
 }, false);
-
 
 function predictAge() {
 
@@ -153,8 +135,7 @@ function predictAge() {
     });
 }
 
-
 document.getElementById("go_to_home").onclick = function () {
-    //location.href = "http://127.0.0.1:5000/";
-    location.href = "https://huntermitchell.net/";
+    location.href = "http://127.0.0.1:8080/";
+    //location.href = "https://huntermitchell.net/";
 };
