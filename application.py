@@ -29,6 +29,7 @@ PRED_PIC_PATH = '/Users/huntermitchell/Documents/Documents/PYTHON_FILES/Face_Pre
 ### LOAD MODELS ###
 
 model_gender = load_model(f"{BASE_MODEL_PATH}/gender_prediction_model")
+#model_gender = load_model("/Users/huntermitchell/Documents/Documents/PYTHON_FILES/Face_Prediction/temp_models/model_gender_201") # working better rn
 model_age = load_model(f"{BASE_MODEL_PATH}/age_prediction_model")
 
 
@@ -91,7 +92,7 @@ def project_post():
         prediction = model_age.predict(pred_img)
         combinedString =  str( (int) (prediction[0,0]) ) + ' years old!'
 
-    print(combinedString)
+    #print(combinedString)
     return combinedString
 
 

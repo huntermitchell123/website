@@ -33,9 +33,6 @@ function startup() {
 
     video.addEventListener('canplay', function (ev) {
         if (!streaming) {
-            //height = video.videoHeight / (video.videoWidth/width);
-            //height = 320;
-
             video.setAttribute('width', width);
             video.setAttribute('height', height);
             canvas.setAttribute('width', width);
@@ -58,7 +55,6 @@ function clearphoto() {
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     var data = canvas.toDataURL('image/png');
-    //photo.setAttribute('src', data); // Get error here */
 }
 
 function takepicture() {
@@ -69,14 +65,13 @@ function takepicture() {
         context.drawImage(video, 0, 0, width, height);
 
         var data = canvas.toDataURL('image/png');
-        //photo.setAttribute('src', data); 
     } else {
         clearphoto();
     } 
 } 
 window.addEventListener('load', startup, false);
 
-// WHERE THE TWO SEPARATE
+
 
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
@@ -92,7 +87,6 @@ function predictGender() {
 
     var dataURL = canvas.toDataURL('image/png');
 
-    //photo.setAttribute('src', data);
     //communicate to server  ~~~ https://stackoverflow.com/questions/41957490/send-canvas-image-data-uint8clampedarray-to-flask-server-via-ajax
 
     $.ajax({
@@ -103,7 +97,7 @@ function predictGender() {
         success:function(response){ 
             //console.log(response)
             $('<h5>'+response+'</h5>').replaceAll('h5'); 
-        } // plz work
+        }
     }).done(function () {
         console.log('sent');
     });
@@ -118,18 +112,17 @@ function predictAge() {
 
     var dataURL = canvas.toDataURL('image/png');
 
-    //photo.setAttribute('src', data);
     //communicate to server  ~~~ https://stackoverflow.com/questions/41957490/send-canvas-image-data-uint8clampedarray-to-flask-server-via-ajax
 
     $.ajax({
         type: "POST",
-        //url: "http://127.0.0.1:5000/project",
-        url: "https://huntermitchell.net/project",
+        url: "http://127.0.0.1:8080/project",
+        //url: "https://huntermitchell.net/project",
         data:{imageBase64: dataURL, predType: 'age'},
         success:function(response){ 
             //console.log(response)
             $('<h4>'+response+'</h4>').replaceAll('h4'); 
-        } // plz work
+        }
     }).done(function () {
         console.log('sent');
     });
