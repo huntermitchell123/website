@@ -24,7 +24,7 @@ document.getElementById("go_to_github").onclick = function () {
 document.getElementById("go_to_resume").onclick = function () {
     //location.href = "";
     window.open(
-        '',
+        'https://github.com/huntermitchell123/website/blob/1beecc8e3a20667923f10da1f639bf706f419b4e/Hunter_Mitchell_Resume.pdf',
         '_blank' // <- This is what makes it open in a new window.
       );
 };
