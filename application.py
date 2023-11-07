@@ -40,17 +40,17 @@ IMG_SIZE = 256
 
 ### LOAD MODELS ###
 
-# Current Gender Model: DenseNet201, 3000 imgs, seed 2016, epochs 10, batch size 32, img size 256, 85/15 split
-gender_filename = 'kaggle_model_gender'
-dir_name = os.path.dirname(os.path.abspath(__file__))
-gender_path = os.path.join(dir_name, gender_filename)
-gender_model = load_model(gender_path)
+#gender_filename = 'kaggle_model_gender'
+#dir_name = os.path.dirname(os.path.abspath(__file__))
+#model_gender_path = os.path.join(dir_name, gender_filename)
+model_gender_path = "/Users/huntermitchell/Documents/Documents/PYTHON_FILES/Face_Prediction/gender_prediction_model"
+model_gender = load_model(model_gender_path)
 
 
-# Current Age Model: DenseNet201, 3000 imgs, seed 2016, epochs 15, batch size 32, img size 256, 85/15 split
-age_filename = 'kaggle_model_age'
-age_path = os.path.join(dir_name, age_filename)
-age_model = load_model(age_path)
+#age_filename = 'kaggle_model_age'
+#model_age_path = os.path.join(dir_name, age_filename)
+model_age_path = "/Users/huntermitchell/Documents/Documents/PYTHON_FILES/Face_Prediction/age_prediction_model"
+model_age = load_model(model_age_path)
 
 
 '''
@@ -112,7 +112,7 @@ def project_post():
 
     
     if 'gender' == request.values['predType']:
-        prediction = gender_model.predict(pred_img)
+        prediction = model_gender.predict(pred_img)
 
         male_prob =  round(prediction[0,0] * 100 , 2)
         female_prob = round( ( 1 - prediction[0,0]) * 100 , 2)
@@ -122,7 +122,7 @@ def project_post():
     
 
     if 'age' == request.values['predType']:
-        prediction = age_model.predict(pred_img)
+        prediction = model_age.predict(pred_img)
         combinedString =  str( (int) (prediction[0,0]) ) + ' years old!'
     
 
@@ -134,7 +134,7 @@ def project_post():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=8080)
 
 
 

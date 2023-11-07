@@ -10,7 +10,7 @@ COPY . .
 RUN pip install --no-cache-dir --no-deps -r requirements.txt
 
 # port number
-EXPOSE 5000
+EXPOSE 8080
 
 # write the command to run application
 CMD ["python", "./application.py"]

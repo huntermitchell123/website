@@ -113,8 +113,8 @@ function predictGender() {
 
     $.ajax({
         type: "POST",
-        //url: "http://127.0.0.1:5000/project",
-        url: "https://huntermitchell.net/project",
+        url: "http://127.0.0.1:8080/project",
+        //url: "https://huntermitchell.net/project",
         data:{imageBase64: dataURL, predType: 'gender'},
         success:function(response){ 
             //console.log(response)
