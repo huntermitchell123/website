@@ -1,13 +1,10 @@
-import sys
-import base64
-import re
-import io
-import cv2
 import os
+import base64
+import io
 
 import numpy as np
-from flask import Flask, request, url_for, redirect, render_template, jsonify
-from tensorflow.keras.models import load_model
+from flask import Flask, request, render_template
+import tensorflow as tf
 from PIL import Image
 
 
@@ -16,36 +13,28 @@ application = app = Flask(__name__)
 
 ### SETTINGS ###
 
-BASE_MODEL_PATH = '/Users/huntermitchell/Documents/Documents/PYTHON_FILES/Face_Prediction' # os.path.dirname(os.path.abspath(__file__))
+BASE_MODEL_PATH = os.path.dirname(os.path.abspath(__file__))
 
 IMG_SIZE = 256
 
 show_classifying_image = False # for debugging
-test_a_pic = False # test manual pic at startup
-PRED_PIC_PATH = '/Users/huntermitchell/Documents/Documents/PYTHON_FILES/Face_Prediction/testing_pics/hunterPic.jpeg'
 
 
 
 ### LOAD MODELS ###
 
-model_gender = load_model(f"{BASE_MODEL_PATH}/gender_prediction_model")
-#model_gender = load_model("/Users/huntermitchell/Documents/Documents/PYTHON_FILES/Face_Prediction/temp_models/model_gender_201") # working better rn
-model_age = load_model(f"{BASE_MODEL_PATH}/age_prediction_model")
+interpreter_age = tf.lite.Interpreter(f"{BASE_MODEL_PATH}/models/age_prediction_model.tflite")
+interpreter_gender = tf.lite.Interpreter(f"{BASE_MODEL_PATH}/models/gender_prediction_model.tflite")
+interpreter_age.allocate_tensors()
+interpreter_gender.allocate_tensors()
+
+input_details_age = interpreter_age.get_input_details()
+input_details_gender = interpreter_gender.get_input_details()
+output_details_age = interpreter_age.get_output_details()
+output_details_gender = interpreter_gender.get_output_details()
 
 
-
-if test_a_pic:
-    test_img = cv2.imread(PRED_PIC_PATH)
-    test_img = cv2.resize(test_img,(IMG_SIZE,IMG_SIZE))
-    test_img = test_img.reshape(1,IMG_SIZE,IMG_SIZE,3)
-
-    age_prediction = model_age.predict(test_img)
-    print('age prediction: ', age_prediction[0,0])
-
-    gender_prediction = model_gender.predict(test_img)
-    print('gender prediction: ', gender_prediction[0,0])
-
-
+### DEFINE ROUTES ###
 
 @app.route('/')
 def home_get():
@@ -83,14 +72,18 @@ def project_post():
     #print(pred_img.shape)
 
     if 'gender' == request.values['predType']:
-        prediction = model_gender.predict(pred_img)
-        male_prob =  round(prediction[0,0] * 100 , 2)
-        female_prob = round( ( 1 - prediction[0,0]) * 100 , 2)
+        interpreter_gender.set_tensor(input_details_gender[0]['index'], np.float32(pred_img))
+        interpreter_gender.invoke()
+        prediction_gender = interpreter_gender.get_tensor(output_details_gender[0]['index'])
+        male_prob =  round(prediction_gender[0,0] * 100 , 2)
+        female_prob = round( ( 1 - prediction_gender[0,0]) * 100 , 2)
         combinedString = 'Male Probability: ' + str(male_prob) + '%, Female Probability: ' + str(female_prob) + '%'
 
     if 'age' == request.values['predType']:
-        prediction = model_age.predict(pred_img)
-        combinedString =  str( (int) (prediction[0,0]) ) + ' years old!'
+        interpreter_age.set_tensor(input_details_age[0]['index'], np.float32(pred_img))
+        interpreter_age.invoke()
+        prediction_age = interpreter_age.get_tensor(output_details_age[0]['index'])
+        combinedString =  str( (int) (prediction_age[0,0]) ) + ' years old!'
 
     #print(combinedString)
     return combinedString
