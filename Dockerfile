@@ -1,8 +1,5 @@
 FROM python:3.7
 
-# set a directory for the app
-WORKDIR /Users/huntermitchell/Documents/PYTHON_FILES/webApp/app
-
 # copy all the files to the container
 COPY . .
 
