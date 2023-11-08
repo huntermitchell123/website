@@ -10,8 +10,11 @@ from PIL import Image
 
 
 app = Flask(__name__)
+
 #CORS(app, resources={r"/project/": {"origins": "https://www.huntermitchell.net"}})
 
+#app.config['CORS_HEADERS'] = 'Content-Type'
+#cors = CORS(app, resources={r"/foo": {"origins": "http://localhost:port"}})
 
 ### SETTINGS ###
 
@@ -50,9 +53,10 @@ def project_get():
 
 @app.route('/project', methods=['POST'])
 def project_post():
-
-    request.headers.add('Access-Control-Allow-Origin', '*')
+    print('here1')
     image_b64 = request.values['imageBase64']
+    print('here2')
+    image_b64.headers.add('Access-Control-Allow-Origin', '*')
     image_b64 = image_b64[22:] # get ride of first 22 characters
     image_bytes = base64.b64decode(image_b64) # is in bytes now 
 
