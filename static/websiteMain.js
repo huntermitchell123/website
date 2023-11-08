@@ -2,8 +2,8 @@
 
 document.getElementById("go_to_project").onclick = function () {
     //location.href = "http://127.0.0.1:8080/project";
-    location.href = "https://face-prediction-temp.onrender.com/project";
-    //location.href = "https://huntermitchell.net/project";
+    //location.href = "https://face-prediction-temp.onrender.com/project";
+    location.href = "https://huntermitchell.net/project";
 };
 
 document.getElementById("go_to_linkedin").onclick = function () {
