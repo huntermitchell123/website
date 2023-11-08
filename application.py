@@ -9,8 +9,8 @@ import tflite_runtime.interpreter as tflite
 from PIL import Image
 
 
-app = Flask(__name__)
-CORS(app)
+application = app = Flask(__name__)
+CORS(application)
 
 
 ### SETTINGS ###
