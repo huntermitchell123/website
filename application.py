@@ -4,13 +4,11 @@ import io
 
 import numpy as np
 from flask import Flask, request, render_template
-from flask_cors import CORS
 import tflite_runtime.interpreter as tflite
 from PIL import Image
 
 
-application = app = Flask(__name__)
-CORS(application)
+app = Flask(__name__)
 
 
 ### SETTINGS ###
@@ -89,6 +87,14 @@ def project_post():
 
     #print(combinedString)
     return combinedString
+
+
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  return response
 
 
 if __name__ == "__main__":
