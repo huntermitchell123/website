@@ -3,7 +3,7 @@ import base64
 import io
 
 import numpy as np
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, Response
 from flask_cors import CORS
 import tflite_runtime.interpreter as tflite
 from PIL import Image
@@ -37,6 +37,11 @@ output_details_gender = interpreter_gender.get_output_details()
 
 
 ### DEFINE ROUTES ###
+
+@app.before_request
+def basic_authentication():
+    if request.method.lower() == 'options':
+        return Response()
 
 @app.route('/')
 def home_get():
