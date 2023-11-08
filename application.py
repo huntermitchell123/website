@@ -4,11 +4,13 @@ import io
 
 import numpy as np
 from flask import Flask, request, render_template
+from flask_cors import CORS
 import tflite_runtime.interpreter as tflite
 from PIL import Image
 
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 
 
 ### SETTINGS ###
