@@ -1,18 +1,16 @@
 import os
 import base64
-from datetime import timedelta
-from functools import update_wrapper
 import io
 
 import numpy as np
-from flask import Flask, request, render_template, make_response, current_app
-from flask_cors import CORS
+from flask import Flask, request, render_template
+#from flask_cors import CORS
 import tflite_runtime.interpreter as tflite
 from PIL import Image
 
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True)
+#CORS(app, resources={r"/project/": {"origins": "https://www.huntermitchell.net"}})
 
 
 ### SETTINGS ###
@@ -38,64 +36,6 @@ output_details_age = interpreter_age.get_output_details()
 output_details_gender = interpreter_gender.get_output_details()
 
 
-### CORS Decorator Function ###
-
-def crossdomain(origin=None, methods=None, headers=None, max_age=21600,
-                attach_to_all=True, automatic_options=True):
-    """Decorator function that allows crossdomain requests.
-      Courtesy of
-      https://blog.skyred.fi/articles/better-crossdomain-snippet-for-flask.html
-    """
-    if methods is not None:
-        methods = ', '.join(sorted(x.upper() for x in methods))
-    # use str instead of basestring if using Python 3.x
-    if headers is not None and not isinstance(headers, list):
-        headers = ', '.join(x.upper() for x in headers)
-    # use str instead of basestring if using Python 3.x
-    if not isinstance(origin, list):
-        origin = ', '.join(origin)
-    if isinstance(max_age, timedelta):
-        max_age = max_age.total_seconds()
-
-    def get_methods():
-        """ Determines which methods are allowed
-        """
-        if methods is not None:
-            return methods
-
-        options_resp = current_app.make_default_options_response()
-        return options_resp.headers['allow']
-
-    def decorator(f):
-        """The decorator function
-        """
-        def wrapped_function(*args, **kwargs):
-            """Caries out the actual cross domain code
-            """
-            if automatic_options and request.method == 'OPTIONS':
-                resp = current_app.make_default_options_response()
-            else:
-                resp = make_response(f(*args, **kwargs))
-            if not attach_to_all and request.method != 'OPTIONS':
-                return resp
-
-            h = resp.headers
-            h['Access-Control-Allow-Origin'] = origin
-            h['Access-Control-Allow-Methods'] = get_methods()
-            h['Access-Control-Max-Age'] = str(max_age)
-            h['Access-Control-Allow-Credentials'] = 'true'
-            h['Access-Control-Allow-Headers'] = \
-                "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-            if headers is not None:
-                h['Access-Control-Allow-Headers'] = headers
-            return resp
-
-        f.provide_automatic_options = False
-        return update_wrapper(wrapped_function, f)
-    return decorator
-
-
-
 ### DEFINE ROUTES ###
 
 @app.route('/')
@@ -108,10 +48,10 @@ def project_get():
     return render_template('websiteProject.html')
 
 
-@app.route('/project', methods=['POST', 'OPTIONS'])
-@crossdomain(origin='*')
+@app.route('/project', methods=['POST'])
 def project_post():
 
+    request.headers.add('Access-Control-Allow-Origin', '*')
     image_b64 = request.values['imageBase64']
     image_b64 = image_b64[22:] # get ride of first 22 characters
     image_bytes = base64.b64decode(image_b64) # is in bytes now 
@@ -151,13 +91,6 @@ def project_post():
     #print(combinedString)
     return combinedString
 
-
-@app.after_request
-def after_request(response):
-  response.headers.add('Access-Control-Allow-Origin', '*')
-  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-  return response
 
 
 if __name__ == "__main__":
