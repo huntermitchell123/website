@@ -4,14 +4,13 @@ import io
 
 import numpy as np
 from flask import Flask, request, render_template
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 import tflite_runtime.interpreter as tflite
 from PIL import Image
 
 
 app = Flask(__name__)
-app.config['CORS_HEADERS'] = 'Content-Type'
-CORS(app, resources={r"/project": {"origins": "https://www.huntermitchell.net:8080"}})
+CORS(app)
 
 
 ### SETTINGS ###
@@ -50,7 +49,6 @@ def project_get():
 
 
 @app.route('/project', methods=['POST'])
-@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def project_post():
     print('here1')
     image_b64 = request.values['imageBase64']
