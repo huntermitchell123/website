@@ -4,7 +4,7 @@ import io
 
 import numpy as np
 from flask import Flask, request, render_template
-import tensorflow as tf
+import tflite_runtime.interpreter as tflite
 from PIL import Image
 
 
@@ -23,8 +23,8 @@ show_classifying_image = False # for debugging
 
 ### LOAD MODELS ###
 
-interpreter_age = tf.lite.Interpreter(f"{BASE_MODEL_PATH}/models/age_prediction_model.tflite")
-interpreter_gender = tf.lite.Interpreter(f"{BASE_MODEL_PATH}/models/gender_prediction_model.tflite")
+interpreter_age = tflite.Interpreter(f"{BASE_MODEL_PATH}/models/age_prediction_model.tflite")
+interpreter_gender = tflite.Interpreter(f"{BASE_MODEL_PATH}/models/gender_prediction_model.tflite")
 interpreter_age.allocate_tensors()
 interpreter_gender.allocate_tensors()
 
