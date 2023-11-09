@@ -3,7 +3,7 @@ import base64
 import io
 
 import numpy as np
-from flask import Flask, request, render_template, Response
+from flask import Flask, request, render_template, Response, jsonify
 from flask_cors import CORS
 import tflite_runtime.interpreter as tflite
 from PIL import Image
@@ -38,10 +38,15 @@ output_details_gender = interpreter_gender.get_output_details()
 
 ### DEFINE ROUTES ###
 
-@current_app.before_request
-def basic_authentication():
-    if request.method.lower() == 'options':
-        return Response()
+@app.before_request
+def before_request():
+    headers = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' }
+    if request.method == 'OPTIONS' or request.method == 'options': return jsonify(headers), 200
+
+# @app.before_request
+# def basic_authentication():
+#     if request.method.lower() == 'options':
+#         return Response()
 
 @app.route('/')
 def home_get():
