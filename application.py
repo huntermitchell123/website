@@ -10,7 +10,7 @@ from PIL import Image
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 ### SETTINGS ###
@@ -38,10 +38,10 @@ output_details_gender = interpreter_gender.get_output_details()
 
 ### DEFINE ROUTES ###
 
-@app.before_request
-def before_request():
-    headers = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' }
-    if request.method == 'OPTIONS' or request.method == 'options': return jsonify(headers), 200
+# @app.before_request
+# def before_request():
+#     headers = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' }
+#     if request.method == 'OPTIONS' or request.method == 'options': return jsonify(headers), 200
 
 # @app.before_request
 # def basic_authentication():
@@ -60,9 +60,7 @@ def project_get():
 
 @app.route('/project', methods=['POST'])
 def project_post():
-    print('here1')
     image_b64 = request.values['imageBase64']
-    print('here2')
     image_b64 = image_b64[22:] # get ride of first 22 characters
     image_bytes = base64.b64decode(image_b64) # is in bytes now 
 
