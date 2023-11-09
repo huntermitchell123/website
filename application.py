@@ -3,7 +3,7 @@ import base64
 import io
 
 import numpy as np
-from flask import Flask, request, render_template, Response, current_app
+from flask import Flask, request, render_template, Response
 from flask_cors import CORS
 import tflite_runtime.interpreter as tflite
 from PIL import Image
