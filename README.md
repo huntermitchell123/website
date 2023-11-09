@@ -8,6 +8,7 @@ The repo for that work is available at https://github.com/huntermitchell123/Face
 To replicate something like this, it is highly recommended to use Docker, as that makes the distribution much easier.
 I also realized that using Tensorflow Lite uses a lot less memory and disk space for the face prediction model.
 I'm hosting with Render because it's the only free service which provides custom domains and SSL, which is needed for the web app.
+Since it's being hosted for free, the only downside is that the app will autoscale down after a certain time period when no one is actively using it. If this is the case, it should spin up in 10-15 seconds.
 
 For the routing to work correctly, I have Render using the domain huntermitchell.net instead of www.huntermitchell.net. Render will
 automatically add a redirect from the www domain. I also have all the routing in the code use huntermitchell.net. And in my domain provider (NameCheap),
