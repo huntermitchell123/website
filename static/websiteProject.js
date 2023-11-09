@@ -93,7 +93,7 @@ function predictGender() {
         type: "POST",
         //url: "http://127.0.0.1:8080/project",
         //url: "https://face-prediction-temp.onrender.com/project",
-        url: "https://www.huntermitchell.net/project",
+        url: "https://huntermitchell.net/project",
         data:{imageBase64: dataURL, predType: 'gender'},
         success:function(response){ 
             //console.log(response)
@@ -119,7 +119,7 @@ function predictAge() {
         type: "POST",
         //url: "http://127.0.0.1:8080/project",
         //url: "https://face-prediction-temp.onrender.com/project",
-        url: "https://www.huntermitchell.net/project",
+        url: "https://huntermitchell.net/project",
         data:{imageBase64: dataURL, predType: 'age'},
         success:function(response){ 
             //console.log(response)
@@ -133,5 +133,5 @@ function predictAge() {
 document.getElementById("go_to_home").onclick = function () {
     //location.href = "http://127.0.0.1:8080/";
     //location.href = "https://face-prediction-temp.onrender.com/";
-    location.href = "https://www.huntermitchell.net/";
+    location.href = "https://huntermitchell.net/";
 };
