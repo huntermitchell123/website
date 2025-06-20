@@ -22,7 +22,7 @@ document.getElementById("go_to_github").onclick = function () {
 
 document.getElementById("go_to_resume").onclick = function () {
     window.open(
-        'https://drive.google.com/file/d/152CfnJuyECrwOuGLAYvTAKUkPHD16KFI/view?usp=sharing',
+        'https://drive.google.com/file/d/1D0lfGSfUZcxY0g6DRhxzA1_iynyq_Y2Z/view?usp=sharing',
         '_blank' // <- This is what makes it open in a new window.
       );
 };
